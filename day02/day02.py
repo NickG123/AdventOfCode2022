@@ -3,14 +3,15 @@
 from io import FileIO
 
 from result import Result
+from utils.parse import read_lines
 
 
 def run(file: FileIO) -> None:
     """Solution for Day 02."""
     score1 = 0
     score2 = 0
-    for line in file:
-        opponent, move = line.strip().split(" ")
+    for line in read_lines(file):
+        opponent, move = line.split(" ")
 
         # 0 for rock, 1 for paper, 2 for scissors
         opponent_numeric = ord(opponent) - ord("A")
