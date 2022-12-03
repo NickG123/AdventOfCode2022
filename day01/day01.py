@@ -1,17 +1,19 @@
 """Day 01."""
 from heapq import nlargest
-from pathlib import Path
+from io import FileIO
+from types import resolve_bases
 from typing import Callable, Iterator, TypeVar
+
+from result import Result
 
 T = TypeVar("T")
 S = TypeVar("S")
 
 
-def read_lines(path: Path) -> Iterator[str]:
+def read_lines(file: FileIO) -> Iterator[str]:
     """Read lines from a file, stripping newlines."""
-    with path.open() as fin:
-        for line in fin:
-            yield line.strip()
+    for line in file:
+        yield line.strip()
 
 
 def read_groups(
@@ -29,13 +31,8 @@ def read_groups(
             result.append(transformer(item))
 
 
-def run() -> None:
+def run(file: FileIO) -> resolve_bases:
     """Solution for Day 01."""
-    groups = read_groups(read_lines(Path("input")), "", int)
+    groups = read_groups(read_lines(file), "", int)
     result = nlargest(3, [sum(x) for x in groups])
-    print(result[0])
-    print(sum(result))
-
-
-if __name__ == "__main__":
-    run()
+    return Result(result[0], sum(result))
