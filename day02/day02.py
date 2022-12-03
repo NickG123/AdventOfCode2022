@@ -1,12 +1,12 @@
 """Day 02."""
 
-from io import FileIO
+from typing import TextIO
 
 from result import Result
 from utils.parse import read_lines
 
 
-def run(file: FileIO) -> None:
+def run(file: TextIO) -> Result:
     """Solution for Day 02."""
     score1 = 0
     score2 = 0
@@ -27,7 +27,3 @@ def run(file: FileIO) -> None:
         score2 += (ord(move) - ord("X")) * 3
 
     return Result(score1, score2)
-
-
-if __name__ == "__main__":
-    run()

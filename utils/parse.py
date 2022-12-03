@@ -1,11 +1,11 @@
-from io import FileIO
-from typing import Callable, Iterator, TypeVar
+"""Helper functions for parsing input."""
+from typing import Callable, Iterator, TextIO, TypeVar
 
 T = TypeVar("T")
 S = TypeVar("S")
 
 
-def read_lines(file: FileIO) -> Iterator[str]:
+def read_lines(file: TextIO) -> Iterator[str]:
     """Read lines from a file, stripping newlines."""
     for line in file:
         yield line.strip()
