@@ -8,7 +8,7 @@ S = TypeVar("S")
 def read_lines(file: TextIO) -> Iterator[str]:
     """Read lines from a file, stripping newlines."""
     for line in file:
-        yield line.strip()
+        yield line.strip("\r\n")
 
 
 def read_groups(
