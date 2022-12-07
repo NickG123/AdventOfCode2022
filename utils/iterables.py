@@ -1,6 +1,7 @@
 """Helper functions for iterables."""
 
-from itertools import zip_longest
+import collections
+from itertools import islice, zip_longest
 from typing import Iterable, Optional, TypeVar
 
 T = TypeVar("T")
@@ -27,3 +28,16 @@ def grouper(
         return zip(*args)
     else:
         raise ValueError("Expected fill, strict, or ignore")
+
+
+# Also thank to https://docs.python.org/3/library/itertools.html
+def sliding_window(iterable: Iterable[T], n: int) -> Iterable[tuple[T, ...]]:
+    """Iterate over an iterable as a sliding window."""
+    # sliding_window('ABCDEFG', 4) --> ABCD BCDE CDEF DEFG
+    it = iter(iterable)
+    window = collections.deque(islice(it, n), maxlen=n)
+    if len(window) == n:
+        yield tuple(window)
+    for x in it:
+        window.append(x)
+        yield tuple(window)
