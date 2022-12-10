@@ -2,24 +2,11 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass
 from typing import TextIO
 
 from result import Result
+from utils.geometry import Point2D
 from utils.parse import read_lines
-
-
-@dataclass(frozen=True)
-class Point2D:
-    """Represents a point in 2d cartesian space."""
-
-    x: int
-    y: int
-
-    def __add__(self, other: Point2D) -> Point2D:
-        """Add this point to another."""
-        return Point2D(self.x + other.x, self.y + other.y)
-
 
 DIRECTIONS = [Point2D(0, 1), Point2D(1, 0), Point2D(0, -1), Point2D(-1, 0)]
 
