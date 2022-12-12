@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Iterable
 
 
 def unit(num: int) -> int:
@@ -27,3 +28,11 @@ class Point2D:
     def unit(self) -> Point2D:
         """Return a unit vector from this point."""
         return Point2D(unit(self.x), unit(self.y))
+
+    def neighbours(self) -> Iterable[Point2D]:
+        """Return the cardinal neighbours of this point."""
+        for direction in DIRECTIONS:
+            yield self + direction
+
+
+DIRECTIONS = [Point2D(0, 1), Point2D(1, 0), Point2D(0, -1), Point2D(-1, 0)]
