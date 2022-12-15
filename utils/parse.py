@@ -24,3 +24,4 @@ def read_groups(
             result = []
         else:
             result.append(transformer(item))
+    yield result
