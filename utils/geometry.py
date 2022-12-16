@@ -54,5 +54,9 @@ class Point2D:
             ]
         raise Exception("Points do not share a coordinate")
 
+    def manhattan_distance(self, other: Point2D) -> int:
+        """Compute the manhattan distance between two points."""
+        return abs(self.x - other.x) + abs(self.y - other.y)
+
 
 DIRECTIONS = [Point2D(0, 1), Point2D(1, 0), Point2D(0, -1), Point2D(-1, 0)]
