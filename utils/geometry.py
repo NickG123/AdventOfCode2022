@@ -59,4 +59,40 @@ class Point2D:
         return abs(self.x - other.x) + abs(self.y - other.y)
 
 
+@dataclass(frozen=True)
+class Point3D:
+    """Represents a point in 3d cartesian space.
+
+    If I was smarter, I'd genericize this from Point2D.
+    but the typing gets weird
+    """
+
+    x: int
+    y: int
+    z: int
+
+    @staticmethod
+    def parse(s: str, separator: str = ",") -> Point3D:
+        """Parse a point from a string."""
+        x, y, z = s.split(separator)
+        return Point3D(int(x), int(y), int(z))
+
+    def __add__(self, other: Point3D) -> Point3D:
+        """Add this point to another."""
+        return Point3D(self.x + other.x, self.y + other.y, self.z + other.z)
+
+    def neighbours(self) -> Iterable[Point3D]:
+        """Return the cardinal neighbours of this point."""
+        for direction in DIRECTIONS_3D:
+            yield self + direction
+
+
+DIRECTIONS_3D = [
+    Point3D(0, 0, 1),
+    Point3D(0, 0, -1),
+    Point3D(0, 1, 0),
+    Point3D(0, -1, 0),
+    Point3D(1, 0, 0),
+    Point3D(-1, 0, 0),
+]
 DIRECTIONS = [Point2D(0, 1), Point2D(1, 0), Point2D(0, -1), Point2D(-1, 0)]
