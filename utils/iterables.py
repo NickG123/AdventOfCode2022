@@ -2,7 +2,7 @@
 
 import collections
 from itertools import islice, zip_longest
-from typing import Iterable, Iterator, Optional, TypeVar
+from typing import Callable, Iterable, Iterator, Optional, TypeVar
 
 T = TypeVar("T")
 
@@ -44,12 +44,16 @@ def sliding_window(iterable: Iterable[T], n: int) -> Iterable[tuple[T, ...]]:
 
 
 def read_iter_until(
-    data: Iterator[T], terminators: set[T]
+    data: Iterator[T],
+    terminators: Optional[set[T]] = None,
+    pred: Optional[Callable[[T], bool]] = None,
 ) -> tuple[list[T], Optional[T]]:
     """Read an iterator until a terminator, returning the read string and the terminator."""
     result: list[T] = []
     for i in data:
-        if i in terminators:
+        if terminators is not None and i in terminators:
+            return result, i
+        if pred is not None and pred(i):
             return result, i
         result.append(i)
     return result, None
