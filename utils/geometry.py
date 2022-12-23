@@ -96,3 +96,9 @@ DIRECTIONS_3D = [
     Point3D(-1, 0, 0),
 ]
 DIRECTIONS = [Point2D(0, 1), Point2D(1, 0), Point2D(0, -1), Point2D(-1, 0)]
+ALL_DIRECTIONS = DIRECTIONS + [
+    Point2D(1, 1),
+    Point2D(1, -1),
+    Point2D(-1, 1),
+    Point2D(-1, -1),
+]
